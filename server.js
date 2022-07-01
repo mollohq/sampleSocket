@@ -22,9 +22,9 @@ const io = require("socket.io")(server, {
 io.on('connection', (socket) => {
   
   socket.on('disconnect', () => console.log('Client disconnected'));
-  io.emit('con', "Somebody connected");
+  socket.emit('con', "Somebody connected");
   socket.on('messaged', (args) => {
-    io.emit('message', args);
+    socket.emit('message', args);
   });
 });
 
