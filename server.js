@@ -27,7 +27,7 @@ io.on('connection', (socket) => {
     io.emit('message', args);
   });
    socket.on('event_name', (args) => {
-    io.emit('message', args);
+    io.emit('message2', args);
   });
   
 //   setInterval(() => {
