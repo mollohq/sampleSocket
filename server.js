@@ -18,14 +18,20 @@ const io = require("socket.io")(server, {
   }
 });
 
-
+let count = 0
 io.on('connection', (socket) => {
   
   socket.on('disconnect', () => console.log('Client disconnected'));
-  socket.emit('con', "Somebody connected");
+  
   socket.on('messaged', (args) => {
     socket.emit('message', args);
   });
+  
+  setInterval(() => {
+    count++
+       socket.emit('nani', count);
+    }, 100);
+ 
 });
 
 
