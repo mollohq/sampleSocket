@@ -13,7 +13,7 @@
       
        socket.on('message2', (timeString) => {
         el = document.getElementById('server-time');
-        el.innerHTML = 'Esp ' + timeString;
+        el.innerHTML = 'Esp ' + timeString[1]["data"];
         console.log(timeString)
       });
       
