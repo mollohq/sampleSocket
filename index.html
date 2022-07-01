@@ -8,13 +8,13 @@
       socket.on('message', (timeString) => {
         el = document.getElementById('server-time');
         el.innerHTML = 'Message ' + timeString;
-        console.log(timeString)
+//         console.log(timeString)
       });
       
        socket.on('message2', (timeString) => {
         el = document.getElementById('server-time');
-        el.innerHTML = 'Esp ' + timeString[1]["data"];
-        console.log(timeString[1]["data"])
+        el.innerHTML = 'Temp From Esp ----------------- ' + timeString[1]["data"] +"°";
+//         console.log(timeString[1]["data"])
       });
       
       
