@@ -11,6 +11,12 @@
         console.log(timeString)
       });
       
+       socket.on('message2', (timeString) => {
+        el = document.getElementById('server-time');
+        el.innerHTML = 'Esp ' + timeString;
+        console.log(timeString)
+      });
+      
       
 //        setInterval(() => {
 //         count++
@@ -24,5 +30,6 @@
   </head>
   <body>
     <p id="server-time"></p>
+     <p id="time"></p>
   </body>
 </html>
