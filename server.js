@@ -26,7 +26,7 @@ io.on('connection', (socket) => {
   socket.on('messaged', (args) => {
     io.emit('message', args);
   });
-   socket.on('event_name', (args) => {
+   socket.on('event_name', (...args) => {
     io.emit('message', args[0]['data']);
   });
   
