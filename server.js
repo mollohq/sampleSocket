@@ -27,10 +27,10 @@ io.on('connection', (socket) => {
     socket.emit('message', args);
   });
   
-  setInterval(() => {
-    count++
-       socket.emit('nani', count);
-    }, 100);
+//   setInterval(() => {
+//     count++
+//        socket.emit('nani', count);
+//     }, 100);
  
 });
 
