@@ -23,7 +23,7 @@ io.on('connection', (socket) => {
   
   socket.on('disconnect', () => console.log('Client disconnected'));
   
-  socket.on("message", (...args) => {
+  socket.on("message", (args) => {
     io.emit('message', args);
   });
 });
