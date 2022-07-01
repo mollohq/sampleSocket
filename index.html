@@ -15,8 +15,8 @@
        setInterval(() => {
         count++
         socket.emit('messaged',count)
-        console.log("here")
-      }, 1000);
+        
+      }, 100);
       
       
       socket.on('con', (timeString) => {
