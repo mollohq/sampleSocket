@@ -11,14 +11,12 @@ const server = express()
   .listen(PORT, () => console.log(`Listening on ${PORT}`));
 
 
-const io = require("socket.io")(server 
-//                                 {
-//   cors: {
-//     origins: "*:*",
-//     methods: ["GET", "POST"]
-//   }
-// }
-                               );
+const io = require("socket.io")(server,{
+  cors: {
+    origins: "*:*",
+    methods: ["GET", "POST"]
+  }
+});
 
 let count = 0
 io.on('connection', (socket) => {
