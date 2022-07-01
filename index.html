@@ -8,16 +8,18 @@
       socket.on('message', (timeString) => {
         el = document.getElementById('server-time');
         el.innerHTML = 'Message ' + timeString;
-        
         console.log(timeString)
       });
-      socket.on('messaged', (timeString) => {
-             
-        console.log(timeString)
-      });
+      
+      
+       setInterval(() => {
+        socket.emit('messaged',"yawaaaaaaaaaaaaaaaaaaaaaaa")
+        console.log("here")
+      }, 1000);
+      
+      
       socket.on('con', (timeString) => {
-           
-        console.log(timeString)
+         console.log(timeString)
       });
     </script>
   </head>
