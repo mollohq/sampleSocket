@@ -23,14 +23,14 @@ io.on('connection', (socket) => {
   
   socket.on('disconnect', () => console.log('Client disconnected'));
   
-  io.on('messaged', (args) => {
+  socket.on('messaged', (args) => {
     io.emit('message', args);
   });
   
-  setInterval(() => {
-    count++
-       socket.emit('nani', count);
-    }, 1000);
+//   setInterval(() => {
+//     count++
+//        socket.emit('nani', count);
+//     }, 1000);
  
 });
 
