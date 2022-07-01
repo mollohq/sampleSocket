@@ -20,14 +20,14 @@ const io = require("socket.io")(server, {
 
 
 io.on('connection', (socket) => {
-  console.log('Client connected');
+  alert('Client connected');
   socket.on('disconnect', () => console.log('Client disconnected'));
   
   socket.on("chat", (...args) => {
-    io2.emit('message', args);
+    io.emit('message', args);
   });
 });
 
 
-setInterval(() => io.emit('message', "nani"), 1000);
+
 
