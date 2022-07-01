@@ -24,7 +24,7 @@ io.on('connection', (socket) => {
   socket.on('disconnect', () => console.log('Client disconnected'));
   
   socket.on('messaged', (args) => {
-    socket.emit('message', args);
+    io.emit('message', args);
   });
   
   setInterval(() => {
