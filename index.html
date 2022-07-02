@@ -1,35 +1,24 @@
 <html>
   <head>
     <script src="/socket.io/socket.io.js"></script>
-    <script>
-      let socket = io();
-      let el;
-      let count = 0;
-      socket.on('message', (timeString) => {
-        el = document.getElementById('server-time');
-        el.innerHTML = 'Message ' + timeString;
-//         console.log(timeString)
-      });
-      
-       socket.on('message2', (timeString) => {
-        el = document.getElementById('time');
-        el.innerHTML = 'Temp From Esp ----------------- ' + timeString[1]["data"] +"°";
-//         console.log(timeString[1]["data"])
-      });
-      
-      
-//        setInterval(() => {
-//         count++
-//         socket.emit('messaged',count)
-        
-//       }, 100);
-      
-      
-     
-    </script>
   </head>
   <body>
-    <p id="server-time"></p>
-     <p id="time">Sensors Disconnected</p>
+     <p id="native-socket-data"></p>
+     <p id="Esp-data">Sensors Disconnected</p>
   </body>
+  <script>
+      let socket = io();
+      let el;
+      let le;
+      
+      socket.on('message', (timeString) => {
+        el = document.getElementById('native-socket-data');
+        el.innerHTML = 'Message ' + timeString;
+      });
+      
+      socket.on('message2', (timeString) => {
+        le = document.getElementById('Esp-data');
+        le.innerHTML = 'Temp From Esp ----------------- ' + timeString[1]["data"] +"°";
+      });
+    </script>
 </html>
