@@ -1,4 +1,5 @@
-# Node.js Socket.io Example
+# Node.js Socket.io hosted in Heroku
+
 
 This example accompanies the
 [Using WebSockets on Heroku with Node.js](https://devcenter.heroku.com/articles/node-websockets)
