@@ -1,8 +1,6 @@
-# Node.js Socket.io hosted in Heroku
+# Node.js Socket.io Deployed in Heroku
+
+Simple example for deploying socket.io in heroku
 
 
-This example accompanies the
-[Using WebSockets on Heroku with Node.js](https://devcenter.heroku.com/articles/node-websockets)
-tutorial.
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
