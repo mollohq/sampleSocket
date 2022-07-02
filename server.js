@@ -20,7 +20,7 @@ const server = express()
 
 const io = require("socket.io")(server,{
   cors: {
-    origins: "http://localhost:3000",
+    origin: "http://localhost:3000",
     methods: ["GET", "POST"]
   }
 });
