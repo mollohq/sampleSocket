@@ -16,6 +16,7 @@ io.on('connection', (socket) => {
   socket.on('disconnect', () => console.log('Client disconnected'));
   socket.on('messaged', (args) => {
     io.emit('message', args);
+    console.log(args)
   });
    socket.on('event_name', (...args) => {
     io.emit('message2', args);
