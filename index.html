@@ -4,7 +4,7 @@
   </head>
   <body>
      <p id="native-socket-data"></p>
-     <p id="Esp-data">Sensors Disconnected</p>
+     <p id="Esp-data"></p>
   </body>
   <script>
     let count =0
@@ -16,7 +16,7 @@
       setInterval(() => {
         count++
         socket.emit('messaged',count)
-        
+    
       }, 1000);
     
       socket.on('message', (timeString) => {
