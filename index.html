@@ -15,12 +15,17 @@
         
       socket.on('message', (timeString) => {
         el = document.getElementById('native-socket-data');
-        el.innerHTML += 'Message ' + timeString;
+        el.innerHTML += '<br>Message ' + timeString;
       });
       
       socket.on('cockpit', (timeString) => {
         le = document.getElementById('Esp-data');
-        le.innerHTML += timeString
+        le.innerHTML += "<br>" + timeString;
+      });
+
+      socket.on('time', (timeString) => {
+        el = document.getElementById('native-socket-data');
+        el.innerHTML += '<br>Server time: ' + timeString;
       });
     </script>
 </html>

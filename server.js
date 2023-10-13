@@ -23,3 +23,5 @@ io.on('connection', (socket) => {
      console.log(args)
   });
 });
+
+setInterval(() => io.emit('time', new Date().toTimeString()), 10000);
