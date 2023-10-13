@@ -12,21 +12,15 @@
 
       let el;
       let le;
-    
-      setInterval(() => {
-        count++
-        socket.emit('messaged',count)
-    
-      }, 1000);
-    
+        
       socket.on('message', (timeString) => {
         el = document.getElementById('native-socket-data');
-        el.innerHTML = 'Message ' + timeString;
+        el.innerHTML += 'Message ' + timeString;
       });
       
-      socket.on('message2', (timeString) => {
+      socket.on('cockpit', (timeString) => {
         le = document.getElementById('Esp-data');
-        le.innerHTML = 'Temp From Esp ----------------- ' + timeString[1]["data"] +"°";
+        le.innerHTML += timeString
       });
     </script>
 </html>
