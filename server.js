@@ -9,10 +9,16 @@ const server = express()
 const io = require("socket.io")(server);
 io.on('connection', (socket) => {
   socket.on('disconnect', () => console.log('Client disconnected'));
+  
+  socket.on("connect_error", (err) => {
+    console.log(`connect_error due to ${err.message}`);
+  });
+
   socket.on('messaged', (args) => {
     io.emit('message', args);
     console.log(args)
   });
+
    socket.on('event_name', (...args) => {
     io.emit('message2', args);
      console.log(args)
