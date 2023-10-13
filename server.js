@@ -1,28 +1,110 @@
-'use strict';
+/* 'use strict';
+
 const express = require('express');
-const socketIO = require('socket.io');
+const path = require('path');
+const { createServer } = require('http');
+
 const PORT = process.env.PORT || 3000;
-const INDEX = '/index.html';
-const server = express()
-  .use((req, res) => res.sendFile(INDEX, { root: __dirname }))
-  .listen(PORT, () => console.log(`Listening on ${PORT}`));
-const io = require("socket.io")(server);
-io.on('connection', (socket) => {
-  socket.on('disconnect', () => console.log('Client disconnected'));
-  
-  socket.on("connect_error", (err) => {
-    console.log(`connect_error due to ${err.message}`);
-  });
 
-  socket.on('messaged', (args) => {
-    io.emit('message', args);
-    console.log(args)
-  });
+const { WebSocketServer } = require('ws');
 
-   socket.on('event_name', (...args) => {
-    io.emit('message2', args);
-     console.log(args)
+const app = express();
+app.use(express.static(path.join(__dirname, '/public')));
+
+const server = createServer(app);
+const wss = new WebSocketServer({ server });
+
+wss.on('connection', function (ws) {
+  ws.on('error', console.error);
+
+  ws.on('message', function message(data, isBinary) {
+    wss.clients.forEach(function each(client) {
+      if (client !== ws && client.readyState === 1) {
+        client.send(data, { binary: isBinary });
+      }
+    });
   });
 });
 
-setInterval(() => io.emit('time', new Date().toTimeString()), 10000);
+server.listen(PORT, function () {
+  console.log(`Listening on ${PORT}...`);
+}); */
+
+/*
+  Websocket server with express.js
+  (https://www.npmjs.com/package/express) and ws.js
+  (https://www.npmjs.com/package/ws)
+  Serves an index page from /public. That page makes
+  a websocket client back to this server.
+
+  created 17 Jan 2021
+  modified 23 Feb 2023
+  by Tom Igoe
+*/
+// include express, http, and ws libraries:
+const express = require("express");
+// the const {} syntax is called destructuring.
+// it allows you to pull just the one function 
+// you need from the libraries below without 
+// making an instance of the whole library:
+const {createServer} = require("http");
+const {WebSocketServer} = require("ws");
+// make an instance of express:
+const app = express();
+// serve static content from the project's public folder:
+app.use(express.static("public"));
+// make an instance of http server using express instance:
+const server = createServer(app);
+// WebSocketServer needs the http server instance:
+const wss = new WebSocketServer({ server });
+// list of client connections:
+var clients = new Array();
+
+// this runs after the http server successfully starts:
+function serverStart() {
+  var port = this.address().port;
+  console.log("Server listening on port " + port);
+}
+
+// this handles websocket connections:
+function handleClient(thisClient, request) {
+  // you have a new client
+  console.log("New Connection"); 
+  // add this client to the clients array
+
+  clients.push(thisClient); 
+  
+  function endClient() {
+    // when a client closes its connection
+    // get the client's position in the array
+    // and delete it from the array:
+    var position = clients.indexOf(thisClient);
+    clients.splice(position, 1);
+    console.log("connection closed");
+  }
+
+  // if a client sends a message, print it out:
+  function clientResponse(data) {
+    console.log(data.toString());
+    broadcast(data.toString());
+  }
+
+  // This function broadcasts messages to all webSocket clients
+  function broadcast(data) {
+    // iterate over the array of clients & send data to each
+    for (let c in clients) {
+        if (clients[c] !== thisClient && clients[c].readyState === 1) {
+          clients[c].send(data);
+        }
+    }
+  }
+
+  // set up client event listeners:
+  thisClient.on("message", clientResponse);
+  thisClient.on("close", endClient);
+}
+
+// start the server:
+server.listen(process.env.PORT || 3000, serverStart);
+// start the websocket server listening for clients:
+wss.on("connection", handleClient);
