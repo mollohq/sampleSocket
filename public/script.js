@@ -62,7 +62,8 @@ function closeConnection() {
 
 function readIncomingMessage(event) {
   // display the incoming message:
-  incomingSpan.innerHTML += "<br>" + new Date().toLocaleString(undefined, { hour: '2-digit', hour12: false, minute:'2-digit', second:'2-digit'}) + event.data;
+  const timestamp = new Date().toLocaleString(undefined, { hour: '2-digit', hour12: false, minute:'2-digit', second:'2-digit'})
+  incomingSpan.innerHTML += "<br>" + timestamp + JSON.stringify(event.data);
 }
 
 function sendMessage() {
